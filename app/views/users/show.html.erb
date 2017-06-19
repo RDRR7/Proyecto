@@ -1,0 +1,13 @@
+<div class="row">
+	<aside class="col-md-4">
+		<h1><%= @user.name %></h1>
+		<p>	Id: <%= @user.id %> </p>
+		<p>	Date: <%= @user.created_at.strftime("%B %d, %Y") %> </p>
+		<p>	Email: <%= @user.email %> </p>
+		<p>	City: <%= @user.city %> </p>
+		<p>	Country: <%= @user.country %> </p>
+		<p>	Receive email: <%= @user.receive_email %> </p>
+
+		<%= link_to 'Edit', edit_user_registration_path(@user) %>		
+	</aside>
+</div>

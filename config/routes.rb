@@ -1,3 +1,34 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	
+
+	devise_for :users , controllers: {
+		registrations: 'users/registrations'
+	}
+
+	resources :users do
+		resources :campaigns
+	end
+
+	resources :campaigns do
+		collection do
+			get 'medical'
+			get 'education'
+			get 'charity'
+			get 'community'
+			get 'events'
+			get 'dashboard'
+		end
+	end
+
+	resources :campaigns do
+		resources :comments
+		resources :donations
+	end
+
+
+	root 'static_pages#home'
+
+    get 'users/show'
+	get 'plus_like' => 'campaigns#plus_like', as: :plus_like
+
 end

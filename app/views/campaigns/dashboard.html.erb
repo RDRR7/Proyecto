@@ -1,0 +1,29 @@
+<div class="container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Review</th>
+				<th>Category</th>
+				<th>Goal</th>
+				<th>Amount donated</th>
+				<th>Date created</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @campaigns.each do |campaign| %>
+				<tr>
+					<% if campaign.goal > campaign.donations.sum(:amount) %>
+						<td><%= link_to campaign.title, campaign %></td>
+						<td><%= campaign.review %></td>
+						<td><%= campaign.category %></td>
+						<td>$<%= number_with_precision(campaign.goal, :precision => 2)%></td>
+						<td>$<%= number_with_precision(campaign.donations.sum(:amount), :precision => 2) %></td>
+						<td><%= campaign.created_at.strftime("%d/%m/%Y") %></td>
+						<td><%= User.find(campaign.user_id).name %></td>
+					<% end %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
