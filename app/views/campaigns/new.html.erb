@@ -14,45 +14,48 @@
 
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
+		<center><h3> Start a campaign </h3></center>
 		<%= form_for [@user, @campaign] do |f| %>
-			<div class="field">
-				<%= f.label :title %>
-				<%= f.text_field :title %>
+			<div class="form-group">
+				<%= f.label :title, "Title:" %>
+				<%= f.text_field :title, class: "form-control" %>
 			</div>
 
-			<div class="field">
-				<%= f.label :review %>
-				<%= f.text_field :review %>
+			<div class="form-group">
+				<%= f.label :review, "Review:" %>
+				<%= f.text_area :review, class: "form-control" %>
 			</div>
 
-			<div class="field">
-				<%= f.label :description %>
-				<%= f.text_field :description %>
+			<div class="form-group">
+				<%= f.label :description, "Description:" %>
+				<%= f.text_area :description, class: "form-control" %>
 			</div>
 
-			<div class="field">
-				<%= f.label :goal %>
-				<%= f.number_field :goal %>
+			<div class="form-group">
+				<%= f.label :goal, "Goal:" %>
+				<%= f.number_field :goal, class: "form-control" %>
 			</div>
 
-			<div class="field">
-				<%= f.label :category %>
-				<%= f.select :category, ['Medical', 'Education', 'Charity', 'Community', 'Events'] %>
+			<div class="form-group">
+				<%= f.label :category, "Category:" %><br>
+				<%= f.select :category, ['Medical', 'Education', 'Charity', 'Community', 'Events'], class: "form-control" %>
 			</div>
 
-			<div class="field">
-				<%= f.label :image_url %>
-				<%= f.url_field :image_url %>
+			<div class="form-group">
+				<%= f.label :image_url, "Image url:" %>
+				<%= f.url_field :image_url, class: "form-control" %>
 			</div>
 
-			<div class="field">
-				<%= f.label :end_date %>
-				<%= f.date_field :end_date, min: Date.today%>
+			<div class="form-group">
+				<%= f.label :end_date, "End date:" %>
+				<%= f.date_field :end_date, min: Date.today, class: "form-control" %>
 			</div>
 
-			<div class="actions">
-				<%= f.submit %>
-			</div>
+			<center>
+				<%= button_tag(type: 'submit', class: "btn") do %>
+	 				<i class="icon-ok icon-white"></i> Start campaign
+				<% end %>
+			</center>
 		<% end %>
 	</div>
 </div>

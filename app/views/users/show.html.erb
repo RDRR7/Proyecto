@@ -1,13 +1,24 @@
-<div class="row">
-	<aside class="col-md-4">
-		<h1><%= @user.name %></h1>
-		<p>	Id: <%= @user.id %> </p>
-		<p>	Date: <%= @user.created_at.strftime("%B %d, %Y") %> </p>
-		<p>	Email: <%= @user.email %> </p>
-		<p>	City: <%= @user.city %> </p>
-		<p>	Country: <%= @user.country %> </p>
-		<p>	Receive email: <%= @user.receive_email %> </p>
-
-		<%= link_to 'Edit', edit_user_registration_path(@user) %>		
-	</aside>
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<center>
+	<div class="card">
+		<img src="https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" alt="John" style="width:20%">
+		<div class="container">
+			<h1><%= @user.name %></h1>
+			<p class="title">Id: <%= @user.id %></p>
+			<p>	Email: <%= @user.email %> </p>
+			<% if !@user.city.nil? %>
+				<p>	City: <%= @user.city %> </p>
+			<% end %>
+			<% if !@user.country.nil? %>
+				<p>	Country: <%= @user.country %> </p>
+			<% end %>
+			<p>	Receive email: <%= @user.receive_email %> </p>
+			<p>Member since: <%= @user.created_at.strftime("%B %d, %Y") %> </p>
+			<a href="#"><i class="fa fa-dribbble"></i></a> 
+			<a href="#"><i class="fa fa-twitter"></i></a> 
+			<a href="#"><i class="fa fa-linkedin"></i></a> 
+			<a href="#"><i class="fa fa-facebook"></i></a> <br>
+			<%= link_to 'Edit', edit_user_registration_path(@user) %>
+		</div>
+	</div>
+</center>
