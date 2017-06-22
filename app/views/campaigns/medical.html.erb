@@ -1,30 +1,28 @@
-<div class="container">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Review</th>
-				<th>Category</th>
-				<th>Goal</th>
-				<th>Amount donated</th>
-				<th>Date created</th>
-				<th>User</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @campaigns.each do |campaign| %>
-				<tr>
-					<% if campaign.goal > campaign.donations.sum(:amount) %>
-						<td><%= link_to campaign.title, campaign %></td>
-						<td><%= campaign.review %></td>
-						<td><%= campaign.category %></td>
-						<td>$<%= number_with_precision(campaign.goal, :precision => 2)%></td>
-						<td>$<%= number_with_precision(campaign.donations.sum(:amount), :precision => 2) %></td>
-						<td><%= campaign.created_at.strftime("%d/%m/%Y") %></td>
-						<td><%= User.find(campaign.user_id).name %></td>
-					<% end %>
-				</tr>
+<div class="container-fluid bg-3 text-center">
+	<h2>Medical campaigns</h2><br>
+	<% count=0 %>
+	<% @campaigns.each do |campaign| %>
+		<% if campaign.goal > campaign.donations.sum(:amount) and Date.today <= campaign.end_date %>
+			<% if count%4==0 %>
+				<div class="row">
 			<% end %>
-		</tbody>
-	</table>
-</div>
+			<% count=count+1 %>
+			<a href=/campaigns/<%= campaign.id %>>
+				<div class="col-sm-3">
+					<% if !campaign.image_url.blank? %>
+						<img src=<%= campaign.image_url %> class="img-responsive" style="width:100%" alt="Image">
+					<% else %>
+						<img src="http://carlocklibrary.com/wp-content/uploads/2016/12/go-fund-me-logo.png" class="img-responsive" style="width:100%" alt="Image">
+					<% end %>
+					<dt><%= campaign.title %></dt>
+					<kbd><%= campaign.category %></kbd><br>
+					<t>Goal: $<%= number_with_precision(campaign.goal, :precision => 2) %></t><br>
+					<t>Donated: $<%= number_with_precision(campaign.donations.sum(:amount), :precision => 2) %></t>
+				</div>
+			</a>
+			<% if count%4==0 %>
+				</div>
+			<% end %>
+		<%end %>
+	<% end %>
+</div><br><br>

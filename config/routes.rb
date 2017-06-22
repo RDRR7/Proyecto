@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	
+
 
 	devise_for :users , controllers: {
 		registrations: 'users/registrations'
@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 		resources :donations
 	end
 
+	match '/contacts',     to: 'contacts#new',             via: 'get'
+	resources "contacts", only: [:new, :create]
 
 	root 'static_pages#home'
 

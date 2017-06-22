@@ -1,2 +1,67 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>GoFundMe</h1>      
+    <p>#1 for Crowfunding & Fundraising Websites</p>
+  </div>
+</div>
+  
+<div class="container-fluid bg-3 text-center">    
+	<h3>Categories</h3><br>
+	<div class="row">
+		<a href=<%= medical_campaigns_path %>>
+			<div class="col-md-2">
+				<img src="http://www.xilloc.com/wp-content/uploads/2015/09/Medical.png" style="width:100%" alt="Image">
+				<p>Medical</p>
+			</div>
+		</a>
+		<a href=<%= education_campaigns_path %>>
+			<div class="col-md-2">
+				<img src="http://www.unitedwaygso.org/wp-content/uploads/2015/08/education-icon-300x300.png" class="img-responsive" style="width:100%" alt="Image">
+				<p>Education</p>
+			</div>
+		</a>
+		<a href=<%= charity_campaigns_path %>>
+			<div class="col-md-2"> 
+				<img src="https://playmob.io/assets/charity/icon-charity-sign-up-514511a62c1160b819768298716c3e5ebf0af1eeb7c0263889e03d248276165e.png" class="img-responsive" style="width:100%" alt="Image">
+				<p>Charity</p>
+			</div>
+		</a>
+		<a href=<%= community_campaigns_path %>>
+			<div class="col-md-2">
+				<img src="http://www.freeiconspng.com/uploads/community-icon-21.png" class="img-responsive" style="width:100%" alt="Image">
+				<p>Community</p>
+			</div>
+		</a>
+		<a href=<%= events_campaigns_path %>>
+			<div class="col-md-2">
+				<img src="http://www.housingeurope.eu/image/167/sectionheaderpng/events.png" class="img-responsive" style="width:100%" alt="Image">
+				<p>Events</p>
+			</div>
+		</a>
+	</div>
+</div><br>
+
+<div class="container-fluid bg-3 text-center">
+	<h3>Campaigns</h3><br>  
+	<div class="row">
+		<% count=0 %>
+		<% @campaigns.each do |campaign| %>
+			<% if campaign.goal > campaign.donations.sum(:amount) and Date.today <= campaign.end_date and count<4 %>
+				<% count=count+1 %>
+				<a href=/campaigns/<%= campaign.id %>>
+					<div class="col-sm-3">
+						<% if !campaign.image_url.blank? %>
+							<img src=<%= campaign.image_url %> class="img-responsive" style="width:100%" alt="Image">
+						<% else %>
+							<img src="http://carlocklibrary.com/wp-content/uploads/2016/12/go-fund-me-logo.png" class="img-responsive" style="width:100%" alt="Image">
+						<% end %>
+						<dt><%= campaign.title %></dt>
+						<kbd><%= campaign.category %></kbd><br>
+						<t>Goal: $<%= number_with_precision(campaign.goal, :precision => 2) %></t><br>
+						<t>Donated: $<%= number_with_precision(campaign.donations.sum(:amount), :precision => 2) %></t>
+					</div>
+				</a>
+			<%end %>
+		<% end %>
+	</div>
+</div><br><br>

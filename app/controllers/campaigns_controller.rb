@@ -1,26 +1,26 @@
 class CampaignsController < ApplicationController
   def index
-  	@campaigns=Campaign.order(:created_at)
+  	@campaigns=Campaign.order(:created_at).reverse_order
   end
 
   def medical
-    @campaigns=Campaign.where(category: 'Medical')
+    @campaigns=Campaign.where(category: 'Medical').reverse_order
   end
 
   def education
-    @campaigns=Campaign.where(category: 'Education')
+    @campaigns=Campaign.where(category: 'Education').reverse_order
   end
 
   def charity
-    @campaigns=Campaign.where(category: 'Charity')
+    @campaigns=Campaign.where(category: 'Charity').reverse_order
   end
 
   def community
-    @campaigns=Campaign.where(category: 'Community')
+    @campaigns=Campaign.where(category: 'Community').reverse_order
   end
 
   def events
-    @campaigns=Campaign.where(category: 'Events')
+    @campaigns=Campaign.where(category: 'Events').reverse_order
   end
 
   def dashboard
